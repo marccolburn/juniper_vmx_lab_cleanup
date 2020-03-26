@@ -1,0 +1,16 @@
+{% if routing_instances is defined %}
+{% for routing_instance in routing_instances %}
+delete routing-instances {{ routing_instance.name }}
+{% endfor %}
+{% endif %}
+{% if ecmp is defined and ecmp == True %}
+delete forwarding-options hash-key
+delete policy-options
+{% elif policies is defined %}
+delete policy-options
+{% endif %}
+delete protocols
+delete routing-options
+{% for interface in logical_interfaces %}
+delete interfaces {{ interface.name }} unit {{ interface.unit }}
+{% endfor %}

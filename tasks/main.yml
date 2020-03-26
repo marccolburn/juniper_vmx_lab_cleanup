@@ -1,0 +1,5 @@
+---
+- name: Remove configurations from vMX routers
+  junos_config:
+    lines: "{{ lookup('template', 'lab_removal_commands').split('\n') }}"
+    comment: "Removed lab configs"
